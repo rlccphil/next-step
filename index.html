@@ -1796,7 +1796,15 @@
 
   function showFatalError() {
 
-    document.body.innerHTML = `
+    /* Hide the app shell instead of replacing document.body, so the chat
+     * widget (which Tawk.to injects into <body>) stays available here. */
+    document.querySelectorAll('body > header, body > main').forEach(function (el) {
+
+      el.style.display = 'none';
+
+    });
+
+    document.body.insertAdjacentHTML('beforeend', `
       <div
         style="
           max-width:600px;
@@ -1813,10 +1821,23 @@
           authorized.
         </p>
       </div>
-    `;
+    `);
 
   }
 </script>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6342e32837898912e96daad6/1geukemb0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
